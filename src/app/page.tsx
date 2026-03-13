@@ -1,63 +1,50 @@
 import Link from "next/link";
+import { format } from "date-fns";
+import { ja } from "date-fns/locale";
+import { CalendarDays, ChevronRight } from "lucide-react";
 import { getSortedPostsData } from "@/lib/posts";
-import { Calendar, ChevronRight } from "lucide-react";
+
+function formatDisplayDate(date: string): string {
+  const parsed = new Date(date);
+  if (Number.isNaN(parsed.getTime())) {
+    return date;
+  }
+
+  return format(parsed, "yyyy年M月d日", { locale: ja });
+}
 
 export default function Home() {
-  const allPostsData = getSortedPostsData();
+  const posts = getSortedPostsData();
 
   return (
-    <div className="min-h-screen bg-white">
-      <main className="max-w-4xl mx-auto px-4 py-16 text-black">
-        <header className="mb-16">
-          <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl mb-4">
-            My Blogtest
-          </h1>
-          <p className="text-xl text-gray-500">
-            最新の投稿をご覧いただけます
+    <div className="blog-home min-h-screen">
+      <main className="blog-container px-4 py-16">
+        <header className="hero-block">
+          <p className="hero-kicker">Markdown Blog</p>
+          <h1 className="hero-title">記事はMarkdownだけで作れる</h1>
+          <p className="hero-subtitle">
+            postsフォルダにmdファイルを置くだけ。見た目はCSSでまとめて適用されます。
           </p>
         </header>
 
-        <section className="space-y-12">
-          {allPostsData.map(({ slug, date, title, excerpt }) => (
-            <article key={slug} className="group relative border-l-2 border-gray-100 pl-8 transition-colors hover:border-blue-500">
-              <div className="flex flex-col space-y-2">
-                <time className="flex items-center text-sm text-gray-400">
-                  <Calendar className="mr-1.5 h-4 w-4" />
-                  {date}
-                </time>
-                <h2 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600">
-                  <Link href={`/posts/${slug}`}>
-                    <span className="absolute -inset-y-2.5 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl" />
-                    <span className="relative z-10">{title}</span>
-                  </Link>
-                </h2>
-                <p className="relative z-10 text-gray-600 line-clamp-2">
-                  {excerpt}
-                </p>
-                <div className="relative z-10 flex items-center text-sm font-medium text-blue-600 mt-4">
-                  続きを読む
-                  <ChevronRight className="ml-1 h-4 w-4" />
-                </div>
-              </div>
+        <section className="post-list" aria-label="記事一覧">
+          {posts.map((post) => (
+            <article key={post.slug} className="post-card">
+              <time className="post-date" dateTime={post.date}>
+                <CalendarDays size={16} aria-hidden="true" />
+                {formatDisplayDate(post.date)}
+              </time>
+              <h2 className="post-title">
+                <Link href={`/posts/${post.slug}`}>{post.title}</Link>
+              </h2>
+              <p className="post-excerpt">{post.excerpt}</p>
+              <Link className="post-more" href={`/posts/${post.slug}`}>
+                続きを読む
+                <ChevronRight size={16} aria-hidden="true" />
+              </Link>
             </article>
           ))}
         </section>
-      </main>
-    </div>
-  );
-}
-
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
       </main>
     </div>
   );

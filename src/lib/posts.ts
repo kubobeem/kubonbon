@@ -5,6 +5,13 @@ import { remark } from "remark";
 import html from "remark-html";
 
 const postsDirectory = path.join(process.cwd(), "posts");
+const markdownFilePattern = /\.md$/i;
+
+type FrontMatter = {
+  title?: string;
+  date?: string;
+  excerpt?: string;
+};
 
 export interface PostData {
   slug: string;
@@ -14,28 +21,27 @@ export interface PostData {
   contentHtml?: string;
 }
 
-export function getSortedPostsData(): PostData[] {
-  // Get file names under /posts
-  const fileNames = fs.readdirSync(postsDirectory);
-  const allPostsData = fileNames.map((fileName) => {
-    // Remove ".md" from file name to get id
-    const slug = fileName.replace(/\.md$/, "");
+function getPostFiles() {
+  return fs.readdirSync(postsDirectory).filter((fileName) => markdownFilePattern.test(fileName));
+}
 
-    // Read markdown file as string
+export function getSortedPostsData(): PostData[] {
+  const fileNames = getPostFiles();
+  const allPostsData = fileNames.map((fileName) => {
+    const slug = fileName.replace(/\.md$/, "");
     const fullPath = path.join(postsDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, "utf8");
-
-    // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
+    const data = matterResult.data as FrontMatter;
 
-    // Combine the data with the id
     return {
       slug,
-      ...(matterResult.data as { date: string; title: string; excerpt: string }),
+      title: data.title ?? slug,
+      date: data.date ?? "1970-01-01",
+      excerpt: data.excerpt ?? "",
     };
   });
 
-  // Sort posts by date
   return allPostsData.sort((a, b) => {
     if (a.date < b.date) {
       return 1;
@@ -46,7 +52,7 @@ export function getSortedPostsData(): PostData[] {
 }
 
 export function getAllPostSlugs() {
-  const fileNames = fs.readdirSync(postsDirectory);
+  const fileNames = getPostFiles();
   return fileNames.map((fileName) => {
     return {
       params: {
@@ -59,20 +65,19 @@ export function getAllPostSlugs() {
 export async function getPostData(slug: string): Promise<PostData> {
   const fullPath = path.join(postsDirectory, `${slug}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
-
-  // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);
+  const data = matterResult.data as FrontMatter;
 
-  // Use remark to convert markdown into HTML string
   const processedContent = await remark()
     .use(html)
     .process(matterResult.content);
   const contentHtml = processedContent.toString();
 
-  // Combine the data with the id and contentHtml
   return {
     slug,
     contentHtml,
-    ...(matterResult.data as { date: string; title: string; excerpt: string }),
+    title: data.title ?? slug,
+    date: data.date ?? "1970-01-01",
+    excerpt: data.excerpt ?? "",
   };
 }
