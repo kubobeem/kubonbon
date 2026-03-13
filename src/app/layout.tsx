@@ -1,20 +1,25 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { JetBrains_Mono, Manrope, Sora } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const bodyFont = Manrope({
+  variable: "--font-body",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const displayFont = Sora({
+  variable: "--font-display",
+  subsets: ["latin"],
+});
+
+const monoFont = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Markdown Blogtest",
-  description: "Markdownで記事を書いて公開するシンプルブログ",
+  title: "Signal Forge Journal",
+  description: "実装・戦略・成長を同時に扱う次世代型プロダクトジャーナル",
 };
 
 export default function RootLayout({
@@ -25,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${bodyFont.variable} ${displayFont.variable} ${monoFont.variable} antialiased`}
       >
         {children}
       </body>
