@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Midnight Frame | Tags</title>
+  <meta name="description" content="Browse articles by tag." />
+  <meta property="og:title" content="Midnight Frame | Tags" />
+  <meta property="og:description" content="Browse articles by tag." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0c111b" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="tags">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="bg-orb bg-orb-b" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-c" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html" aria-label="Midnight Frame home">
+        <span class="brand-mark">MF</span>
+        <span class="brand-text">Midnight Frame</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link is-active" href="tags.html">Tags</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="wrap main-tags">
+    <section class="hero hero-compact reveal">
+      <p class="hero-kicker">Taxonomy</p>
+      <h1 class="hero-title">Find your next read by topic.</h1>
+      <p class="hero-copy">This page is generated from the same post manifest as the homepage.</p>
+    </section>
+
+    <section class="section reveal" aria-labelledby="tag-cloud-heading">
+      <div class="section-head">
+        <h2 id="tag-cloud-heading">Tag cloud</h2>
+        <p>Click any tag to filter the archive instantly.</p>
+      </div>
+      <div id="tag-pills" class="tag-pills"></div>
+    </section>
+
+    <section class="section reveal" aria-labelledby="tag-results-heading">
+      <div class="section-head">
+        <h2 id="tag-results-heading">Results</h2>
+        <p id="tag-heading">All tags</p>
+      </div>
+      <div id="tag-post-grid" class="post-grid"></div>
+      <p id="tag-empty" class="empty-state hidden">No posts match this tag yet.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Midnight Frame</p>
+      <p>Published on GitHub Pages <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

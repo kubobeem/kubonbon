@@ -1,0 +1,41 @@
+{
+  "site": {
+    "title": "Midnight Frame",
+    "description": "A stylish multi-page blog foundation for GitHub Pages."
+  },
+  "posts": [
+    {
+      "slug": "wake-up-the-layout",
+      "title": "Wake Up The Layout",
+      "date": "2026-03-12",
+      "tags": ["design", "foundation"],
+      "excerpt": "Shape a strong visual voice first, then scale content without layout rewrites.",
+      "readingTime": "4 min read",
+      "status": "published",
+      "featured": true,
+      "content": "posts/wake-up-the-layout.html"
+    },
+    {
+      "slug": "pages-deploy-checklist",
+      "title": "GitHub Pages Deploy Checklist",
+      "date": "2026-03-10",
+      "tags": ["deployment", "github-pages"],
+      "excerpt": "A friction-free release flow for branch-based GitHub Pages publishing.",
+      "readingTime": "5 min read",
+      "status": "published",
+      "featured": false,
+      "content": "posts/pages-deploy-checklist.html"
+    },
+    {
+      "slug": "motion-with-purpose",
+      "title": "Motion With Purpose",
+      "date": "2026-03-08",
+      "tags": ["animation", "ux"],
+      "excerpt": "Use motion to guide reading flow, not to distract from your writing.",
+      "readingTime": "3 min read",
+      "status": "published",
+      "featured": false,
+      "content": "posts/motion-with-purpose.html"
+    }
+  ]
+}

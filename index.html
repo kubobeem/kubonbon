@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Midnight Frame | Home</title>
+  <meta name="description" content="A bold GitHub Pages blog foundation with multi-page navigation and data-driven posts." />
+  <meta property="og:title" content="Midnight Frame" />
+  <meta property="og:description" content="A bold GitHub Pages blog foundation with multi-page navigation and data-driven posts." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0c111b" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="bg-orb bg-orb-a" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb-b" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="index.html" aria-label="Midnight Frame home">
+        <span class="brand-mark">MF</span>
+        <span class="brand-text">Midnight Frame</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a class="nav-link is-active" href="index.html">Home</a>
+        <a class="nav-link" href="tags.html">Tags</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="main-home">
+    <section class="hero wrap reveal">
+      <p class="hero-kicker">Build once. Publish forever.</p>
+      <h1 class="hero-title">A stylish GitHub Pages blog shell, ready for your story.</h1>
+      <p class="hero-copy">
+        This foundation gives you a dramatic visual identity and a content model that scales.
+        Add posts later without touching layout code.
+      </p>
+      <div class="hero-actions">
+        <button id="random-post-btn" class="btn btn-primary" type="button">Read a random post</button>
+        <a class="btn btn-ghost" href="tags.html">Browse by tag</a>
+      </div>
+    </section>
+
+    <section class="wrap section reveal" aria-labelledby="featured-heading">
+      <div class="section-head">
+        <h2 id="featured-heading">Featured</h2>
+        <p>Lead with one spotlight article while the rest stays discoverable below.</p>
+      </div>
+      <div id="featured-post" class="featured-slot"></div>
+    </section>
+
+    <section class="wrap section reveal" aria-labelledby="latest-heading">
+      <div class="section-head section-head-stack">
+        <div>
+          <h2 id="latest-heading">Latest posts</h2>
+          <p>Data-driven cards rendered from a single manifest.</p>
+        </div>
+        <div id="tag-filter" class="tag-filter" aria-label="Filter posts by tag"></div>
+      </div>
+      <div id="post-grid" class="post-grid"></div>
+      <p id="home-empty" class="empty-state hidden">No published posts yet. Add one in data/posts.json.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-brand">Midnight Frame</p>
+      <p>Published on GitHub Pages <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
